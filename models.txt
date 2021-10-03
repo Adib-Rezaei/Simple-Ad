@@ -1,0 +1,18 @@
+Advertiser Table:
+
+id: INT
+name: VARCHAR (30)      NOT NULL
+PRIMARY KEY (id)
+
+
+
+
+
+Ad Table:
+
+id: INT
+title: VARCHAR (50)     NOT NULL
+img_url: VARCHAR (300)  NOT NULL
+link: VARCHAR (300)     NOT NULL
+PRIMARY KEY (id)
+FOREIGN KEY (Advertiser_id)
