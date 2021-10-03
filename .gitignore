@@ -1,0 +1,6 @@
+.vscode/
+Cpp/build/
+*.out
+.idea/
+venv/
+__pycache__/
