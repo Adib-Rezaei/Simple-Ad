@@ -1,0 +1,16 @@
+version: '3.7'
+
+services:
+  postgres:
+    container_name: SimpleAd_django
+    restart: always
+    image: postgres
+    ports:
+    - "5437:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+    volumes:
+    - /home/postgres/SimpleAd_django:/var/lib/postgresql/data
+
