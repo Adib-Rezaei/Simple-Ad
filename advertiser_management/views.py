@@ -1,4 +1,4 @@
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.template import response
 from django.views.generic import ListView, RedirectView
 from advertiser_management.forms import AdForm
@@ -38,8 +38,8 @@ def AdCreateView(request):
     if request.method == 'POST':
         form = AdForm(request.POST)
         if form.is_valid():
-            print("HI")
             form.save()
+            return redirect('/ads')
     context = {'form': form}
 
     return render(request, 'ad_form.html', context)
