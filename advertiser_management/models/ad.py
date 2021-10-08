@@ -1,7 +1,9 @@
 from django.db import models
 
+from advertiser_management.models.base_model import BaseHistoryModel
 
-class Ad(models.Model):
+
+class Ad(BaseHistoryModel):
 
     title = models.CharField(
         max_length=100,
@@ -18,21 +20,16 @@ class Ad(models.Model):
         verbose_name='لینک'
     )
 
-    clicks = models.PositiveIntegerField(
-        default=0,
-        verbose_name='تعداد کلیک'
-    )
-
-    views = models.PositiveIntegerField(
-        default=0,
-        verbose_name='تعداد نمایش'
-    )
-
     advertiser = models.ForeignKey(
         to='advertiser_management.advertiser',
         on_delete=models.CASCADE,
         related_name='ads',
         verbose_name='تبلیغ کننده'
+    )
+
+    is_approved = models.BooleanField(
+        default=False,
+        verbose_name='تاییده شده؟'
     )
 
     def __str__(self) -> str:

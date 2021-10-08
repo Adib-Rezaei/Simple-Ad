@@ -1,9 +1,12 @@
 from django.db import models
 from django.db.models import Sum
+from django.db.models.aggregates import Count
 from django.db.models.functions import Coalesce
 
+from advertiser_management.models.base_model import BaseHistoryModel
 
-class Advertiser(models.Model):
+
+class Advertiser(BaseHistoryModel):
 
     name = models.CharField(
         max_length=100,
@@ -13,14 +16,14 @@ class Advertiser(models.Model):
     @property
     def total_clicks(self):
         return self.ads.aggregate(total_clicks=Coalesce(
-            Sum('clicks'),
+            Count('clicks'),
             0
         )).get('total_clicks')
 
     @property
     def total_views(self):
         return self.ads.aggregate(total_views=Coalesce(
-            Sum('views'),
+            Count('views'),
             0
         )).get('total_views')
 
