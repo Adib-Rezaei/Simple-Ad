@@ -27,7 +27,8 @@ class Click(BaseEventModel):
 
     def save(self, *args, **kwargs):
         if not self.pk:
-            self.delay = timezone.now() - self.ad.views.filter(ip=self.ip).order_by('-created').first().created
+            if self.ad.views.filter(ip=self.ip).order_by('-created').first():
+                self.delay = timezone.now() - self.ad.views.filter(ip=self.ip).order_by('-created').first().created
         super(Click, self).save(*args, **kwargs)
 
     def __str__(self) -> str:

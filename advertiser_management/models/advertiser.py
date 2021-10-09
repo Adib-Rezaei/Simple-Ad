@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 from django.db.models import Sum
 from django.db.models.aggregates import Count
@@ -6,7 +7,7 @@ from django.db.models.functions import Coalesce
 from advertiser_management.models.base_model import BaseHistoryModel
 
 
-class Advertiser(BaseHistoryModel):
+class Advertiser(User, BaseHistoryModel):
 
     name = models.CharField(
         max_length=100,
@@ -29,6 +30,12 @@ class Advertiser(BaseHistoryModel):
 
     def __str__(self) -> str:
         return str(self.id) + ' - ' + str(self.name)
+
+    def save(self, *args, **kwargs):
+        if not self.pk:
+            self.usesrname = self.name 
+        super(Advertiser, self).save(*args, **kwargs)
+
 
     class Meta:
         verbose_name = 'تبلیغ کننده'
