@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'django_filters',
-    'advertiser_management.apps.AdvertiserManagementConfig'
+    'advertiser_management.apps.AdvertiserManagementConfig',
+    'django_celery_beat', 
 ]
 
 MIDDLEWARE = [
@@ -144,3 +145,18 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static")
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+from celery.schedules import crontab
+
+CELERY_BROKER_URL = 'redis://localhost:6379'   
+CELERY_BEAT_SCHEDULE = {
+
+    'hourly_report': {
+       'task': 'hourly_report',
+       'schedule': 3600.0
+    },
+    'daily_report': {
+       'task': 'daily_report',
+       'schedule': 24*3600.0
+    },      
+}
