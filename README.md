@@ -1,3 +1,3 @@
-# Simple Ad - Part 7
+# Simple Ad - Part 8
 
-## Django REST Framework
+## Celery
