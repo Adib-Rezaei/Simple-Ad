@@ -1,1 +1,3 @@
-# Simple Ad - Part 6
+# Simple Ad - Part 7
+
+## Django REST Framework
