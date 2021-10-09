@@ -7,6 +7,6 @@ class RetrieveIPMiddleware:
         return response
 
     def process_view(self, request, view_func, view_args, view_kwargs):
-        ip_dependant_views = ['AdvertisementView', 'AdRedirectView']
+        ip_dependant_views = ['AdvertiserViewSet', 'AdViewSet', 'AdRedirectView']
         if view_func.__name__ in ip_dependant_views:
             view_kwargs['ip'] = request.META.get('REMOTE_ADDR')
